@@ -1,0 +1,158 @@
+(kicad_sch
+  (version 20231120)
+  (generator "claude_ai")
+  (generator_version "1.0")
+  (uuid "a1b2c3d4-e5f6-7890-abcd-ef0123456789")
+  (paper "A3")
+  (title_block
+    (title "Saeco Lirika OTC - ESP32 IoT Button Duplicator")
+    (date "2026-02-11")
+    (rev "1.0")
+    (company "Coffee Machine IoT Project")
+    (comment 1 "ESP32-WROOM-32 + 7x PC817 Optocouplers")
+    (comment 2 "Parallel button duplication for Saeco Lirika OTC RI9851/01")
+    (comment 3 "GitHub: OleksandrKeks/coffee-machine-iot")
+  )
+
+  (lib_symbols
+  )
+
+
+  ;; ===== ТЕКСТОВЫЕ АННОТАЦИИ СХЕМЫ =====
+
+  ;; Заголовок
+  (text "SAECO LIRIKA OTC - ESP32 IoT BUTTON DUPLICATOR"
+    (at 148 25 0)
+    (effects (font (size 5 5) (thickness 0.5) (bold yes)))
+  )
+  (text "Схема подключения ESP32 к кнопкам кофемашины через оптопары PC817"
+    (at 148 33 0)
+    (effects (font (size 2.5 2.5)))
+  )
+
+  ;; ===== БЛОК ESP32 =====
+  (text "ESP32-WROOM-32 (DevKit + Screw Terminal Board)"
+    (at 60 55 0)
+    (effects (font (size 3 3) (thickness 0.3) (bold yes)))
+  )
+
+  ;; Распиновка ESP32 - выходы на оптопары
+  (text "GPIO 23 (D23) ----[ R1 330Ω ]----> PC817 #1 LED ----> BTN ESPRESSO (кнопка 18)"
+    (at 30 70 0)
+    (effects (font (size 2 2)))
+  )
+  (text "GPIO 22 (D22) ----[ R2 330Ω ]----> PC817 #2 LED ----> BTN LUNGO (кнопка 19)"
+    (at 30 78 0)
+    (effects (font (size 2 2)))
+  )
+  (text "GPIO 21 (D21) ----[ R3 330Ω ]----> PC817 #3 LED ----> BTN CAPPUCCINO (кнопка 22)"
+    (at 30 86 0)
+    (effects (font (size 2 2)))
+  )
+  (text "GPIO 19 (D19) ----[ R4 330Ω ]----> PC817 #4 LED ----> BTN LATTE (кнопка 23)"
+    (at 30 94 0)
+    (effects (font (size 2 2)))
+  )
+  (text "GPIO 18 (D18) ----[ R5 330Ω ]----> PC817 #5 LED ----> BTN STRENGTH (кнопка 20)"
+    (at 30 102 0)
+    (effects (font (size 2 2)))
+  )
+  (text "GPIO 5  (D5)  ----[ R6 330Ω ]----> PC817 #6 LED ----> BTN MENU (кнопка 24)"
+    (at 30 110 0)
+    (effects (font (size 2 2)))
+  )
+  (text "GPIO 4  (D4)  ----[ R7 330Ω ]----> PC817 #7 LED ----> BTN POWER (кнопка 21)"
+    (at 30 118 0)
+    (effects (font (size 2 2)))
+  )
+
+
+  ;; ===== ДЕТАЛЬНАЯ СХЕМА ОДНОГО КАНАЛА =====
+  (text "═══════════════════════════════════════════════════════════════"
+    (at 148 135 0)
+    (effects (font (size 2 2)))
+  )
+  (text "ДЕТАЛЬНАЯ СХЕМА ОДНОГО КАНАЛА (x7 каналов одинаковых):"
+    (at 148 142 0)
+    (effects (font (size 3 3) (thickness 0.3) (bold yes)))
+  )
+
+  (text "                    PC817 Optocoupler"
+    (at 148 155 0)
+    (effects (font (size 2 2)))
+  )
+  (text "                   ┌──────────────┐"
+    (at 148 160 0)
+    (effects (font (size 2 2)))
+  )
+  (text "ESP32 GPIO ──[330Ω]──┤ 1 (Anode)    4 (Collector) ├── Контакт A кнопки Saeco"
+    (at 148 166 0)
+    (effects (font (size 2 2)))
+  )
+  (text "ESP32 GND ───────────┤ 2 (Cathode)  3 (Emitter)   ├── Контакт B кнопки Saeco"
+    (at 148 172 0)
+    (effects (font (size 2 2)))
+  )
+  (text "                   └──────────────┘"
+    (at 148 178 0)
+    (effects (font (size 2 2)))
+  )
+
+  (text "Когда ESP32 GPIO = HIGH → ток через LED оптопары → фототранзистор открыт → кнопка 'нажата'"
+    (at 148 188 0)
+    (effects (font (size 2 2)))
+  )
+  (text "Когда ESP32 GPIO = LOW  → LED не светит → фототранзистор закрыт → кнопка 'отпущена'"
+    (at 148 194 0)
+    (effects (font (size 2 2)))
+  )
+
+  ;; ===== ПИТАНИЕ =====
+  (text "═══════════════════════════════════════════════════════════════"
+    (at 148 208 0)
+    (effects (font (size 2 2)))
+  )
+  (text "ПИТАНИЕ:"
+    (at 30 215 0)
+    (effects (font (size 3 3) (thickness 0.3) (bold yes)))
+  )
+  (text "ESP32 питается через USB (5V) или внешний БП 5V → VIN"
+    (at 30 223 0)
+    (effects (font (size 2 2)))
+  )
+  (text "PC817 LED: Vf=1.2V, If=10mA, R=(3.3-1.2)/0.01 = 210Ω → используем 330Ω (запас)"
+    (at 30 231 0)
+    (effects (font (size 2 2)))
+  )
+
+  ;; ===== СПИСОК КОМПОНЕНТОВ =====
+  (text "═══════════════════════════════════════════════════════════════"
+    (at 148 245 0)
+    (effects (font (size 2 2)))
+  )
+  (text "BOM (Bill of Materials):"
+    (at 30 252 0)
+    (effects (font (size 3 3) (thickness 0.3) (bold yes)))
+  )
+  (text "1x  ESP32-WROOM-32 DevKit + Screw Terminal Board"
+    (at 30 260 0)
+    (effects (font (size 2 2)))
+  )
+  (text "7x  PC817 Optocoupler (DIP-4)"
+    (at 30 266 0)
+    (effects (font (size 2 2)))
+  )
+  (text "7x  Резистор 330Ω 1/4W"
+    (at 30 272 0)
+    (effects (font (size 2 2)))
+  )
+  (text "1x  USB кабель или БП 5V для питания ESP32"
+    (at 30 278 0)
+    (effects (font (size 2 2)))
+  )
+  (text "~14x Провод для подключения к контактам кнопок Saeco"
+    (at 30 284 0)
+    (effects (font (size 2 2)))
+  )
+
+)
